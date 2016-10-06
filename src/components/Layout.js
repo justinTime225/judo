@@ -2,8 +2,14 @@
 
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
-export default class Layout extends React.Component {
+class Layout extends React.Component {
+  componentWillMount() {
+    console.log('LAYOUT!!!!!!')
+    console.log('athletes', this.props.athletes[1]);
+    console.log('test', this.props.test);
+  }
   render() {
     return (
       <div className="app-container">
@@ -32,3 +38,12 @@ export default class Layout extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    athletes: state.athletes,
+    test: state.test
+  }
+}
+
+export default connect(mapStateToProps)(Layout)

@@ -9,6 +9,11 @@ import { match, RouterContext } from 'react-router';
 import routes from './routes';
 import NotFoundPage from './components/NotFoundPage';
 import Helmet from 'react-helmet';
+import reducers from './reducers';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+
+const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 // initialize the server and configure support for ejs templates
 const app = new Express();
@@ -39,7 +44,12 @@ app.get('*', (req, res) => {
       let markup;
       if (renderProps) {
         // if the current route matched we have renderProps
-        markup = renderToString(<RouterContext {...renderProps}/>);
+        const store = createStoreWithMiddleware(reducers);
+        markup = renderToString(
+          <Provider store={store}>
+            <RouterContext {...renderProps}/>
+          </Provider>
+        );
       } else {
         // otherwise we can render a 404 page
         markup = renderToString(<NotFoundPage/>);
@@ -47,6 +57,7 @@ app.get('*', (req, res) => {
       }
 
       // render the index template with the embedded React markup
+
       const head = Helmet.rewind();
       return res.render('index', { markup, head });
     }
