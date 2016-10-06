@@ -5,11 +5,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 class Layout extends React.Component {
-  componentWillMount() {
-    console.log('LAYOUT!!!!!!')
-    console.log('athletes', this.props.athletes[1]);
-    console.log('test', this.props.test);
-  }
+  
   render() {
     return (
       <div className="app-container">

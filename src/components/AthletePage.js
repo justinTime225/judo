@@ -8,15 +8,26 @@ import Medal from './Medal';
 import Flag from './Flag';
 import athletes from '../data/athletes';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
 
-export default class AthletePage extends React.Component {
+class AthletePage extends React.Component {
+  componentWillMount() {
+    console.log('LAYOUT!!!!!!')
+    // console.log('athletes', this.props.athletes[1]);
+    console.log('test', this.props.test);
+  }
+
   render() {
+    if (!this.props.athletes) {
+      return <div>Loading</div>
+    }
     const id = this.props.params.id;
-    const athlete = athletes.filter((athlete) => athlete.id === id)[0];
+    const athlete = this.props.athletes.filter((athlete) => athlete.id === id)[0];
     if (!athlete) {
       return <NotFoundPage/>;
     }
     const headerStyle = { backgroundImage: `url(/img/${athlete.cover})` };
+    console.log(athlete.name, '---')
     return (
       <div>
         <Helmet
@@ -54,3 +65,11 @@ export default class AthletePage extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    athletes: state.athletes,
+    test: state.test
+  }
+}
+export default connect(mapStateToProps)(AthletePage)
