@@ -24,7 +24,7 @@ export default class AthletePage extends React.Component {
           meta={[
              {'property': 'og:testTAG', 'content': `the test person`},
              {'property': 'og:title', 'content': `About ${athlete.name}`},
-             {'property': 'og:image', 'content': `https://vast-reaches-20883.herokuapp.com/img/${athlete.image}`},
+             {'property': 'og:image', 'content': `https://judoseo.herokuapp.com/img/${athlete.image}`},
            ]}/>
 
         <div className="athlete-full">
