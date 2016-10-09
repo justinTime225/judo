@@ -1,5 +1,3 @@
-'use strict';
-
 import path from 'path';
 import { Server } from 'http';
 import Express from 'express';
@@ -12,9 +10,7 @@ import Helmet from 'react-helmet';
 import reducers from './reducers';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-
 const createStoreWithMiddleware = applyMiddleware()(createStore);
-
 // initialize the server and configure support for ejs templates
 const app = new Express();
 const server = new Server(app);
@@ -57,7 +53,7 @@ app.get('*', (req, res) => {
       }
 
       // render the index template with the embedded React markup
-
+      // HELMET REWINDS GRAB ALL HELMET CODE I THINK
       const head = Helmet.rewind();
       return res.render('index', { markup, head });
     }
@@ -65,9 +61,9 @@ app.get('*', (req, res) => {
 });
 
 // start the server
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const env = process.env.NODE_ENV || 'production';
-server.listen(port, err => {
+app.listen(port, err => {
   if (err) {
     return console.error(err);
   }

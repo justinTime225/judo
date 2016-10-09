@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 
 class AthletePage extends React.Component {
   componentWillMount() {
-    console.log('LAYOUT!!!!!!')
+    console.log('No Bundle!!!!!!')
     // console.log('athletes', this.props.athletes[1]);
     console.log('test', this.props.test);
   }
